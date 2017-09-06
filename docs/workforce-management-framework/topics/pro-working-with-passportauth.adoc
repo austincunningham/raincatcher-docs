@@ -1,0 +1,53 @@
+[id='pro-working-with-passportauth-{chapter}']
+= Introduction
+
+This section includes:
+
+//. xref:pro-disabling-passportauth-{chapter}[Disabling PassportAuth]
+//. xref:pro-enabling-passportauth-{chapter}[Enabling PassportAuth]
+. xref:pro-pointing-passportauth-to-a-datasource-{chapter}[Pointing PassportAuth to a Datasource]
+
+= Prerequisites
+
+You must have completed:
+
+. xref:getting-started[Getting Started]
+
+= Procedure
+
+//[id='pro-disabling-passportauth-{chapter}']
+//[discrete]
+//== Disabling PassportAuth
+
+//<***TODO***>
+//[source,bash]
+//----
+//<***TODO***>
+//----
+
+//[id='pro-enabling-passportauth-{chapter}']
+//[discrete]
+//== Enabling PassportAuth
+
+//<***TODO***>
+//[source,bash]
+//----
+//<***TODO***>
+//----
+== Configuration of PassportAuth module
+
+As the PassportAuth module is the default provider of authentication and authorisation, it is already integrated 
+with the Demo applications. It is an out of the box security solution for default integration using static 
+JSON files as user source. The sample users and access roles are defined in a JSON file for Demo purposes in the 
+link:{WFM-RC-CoreURL}{WFM-RC-Branch}/demo/server/src/modules/wfm-user/users.json[Demo Data] To use different source please follow guide bellow. RainCatcher PassportAuth is a lightweight solution 
+that offers all the functionality required to get started.
+
+[id='pro-pointing-passportauth-to-a-datasource-{chapter}']
+[discrete]
+== Pointing PassportAuth to a Datasource
+
+NOTE: _UserRepository_ requires user data containing a minimum of username and password to work.
+
+. Implement the link:../../../api/{WFM-RC-Api-Version}{WFM-RC-Api-User-Repository}[UserRepository].
+
+For an end to end implementation of the _UserRepository_ interface, see link:{WFM-RC-Github-Core}{WFM-RC-Branch}{WFM-RC-PassportAuth-Example}[PassportAuth-Example].
