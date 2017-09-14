@@ -5,8 +5,6 @@ include::topics/shared/attributes.adoc[]
 
 = Working With {WFM-RC-KeycloakName}
 
-This section describes how to modify aspects of *{WFM-RC-KeycloakName}*.
-
 //Concepts
 The {WFM-RC-NameShort} Demo Application allows for authentication and access management using link:http://www.keycloak.org/index.html[{WFM-RC-KeycloakName}]
 however, {WFM-RC-KeycloakName} is not the default authorization and authentication module for {WFM-RC-NameShort}.
@@ -16,6 +14,7 @@ NOTE: To configure your own instance of {WFM-RC-KeycloakName}, see the link:{WFM
 
 //Procedures
 include::topics/pro-keycloak-implementation.adoc[leveloffset=+1]
+include::topics/pro-keycloak-enablement.adoc[leveloffset=+1]
 
 == {WFM-RC-KeycloakName} Reference Material
 The security aspects of *{WFM-RC-KeycloakName}* are described in the Security Strategy and cover areas such as:

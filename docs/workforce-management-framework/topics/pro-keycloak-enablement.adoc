@@ -1,61 +1,78 @@
 [id='pro-keycloak-enablement-{chapter}']
-= Introduction
+= Enabling {WFM-RC-KeycloakName}
 
 This section includes:
 
-. xref:pro-pointing-passportauth-to-a-datasource-{chapter}[Pointing PassportAuth to a Datasource]
+NOTE: Steps 3 and 4 are valid for any instance of *{WFM-RC-KeycloakName}* provided you implement the _Realm settings_.
 
-= Prerequisites
+. xref:pro-run-keycloak-docker-image-{chapter}[Running the {WFM-RC-KeycloakName} Docker Image]
+. xref:pro-adding-keycloak-configuration-{chapter}[Importing the {WFM-RC-KeycloakName} Realm Settings]
+. xref:pro-adding-keycloak-configuration-{chapter}[Adding {WFM-RC-KeycloakName} Configuration]
+. xref:pro-enabling-keycloak-on-the-demo-server-{chapter}[Enabling {WFM-RC-KeycloakName} on the Demo Server]
+
+IMPORTANT: Enabling *{WFM-RC-KeycloakName}* requires the disabling of *PassportAuth*.
+
+== Prerequisites
 
 . Ensure you have completed xref:getting-started[Getting Started]
 . Docker (tested with version: {WFM-RC-DockerVersion})
 
-= Enabling {WFM-RC-KeycloakName} Integration
-
 [id='pro-run-keycloak-docker-image-{chapter}']
 [discrete]
-== Run {WFM-RC-KeycloakName} Docker Image
+=== Running the {WFM-RC-KeycloakName} Docker Image
 
-. Ensure you can access the {WFM-RC-KeycloakName} Docker image from link:https://github.com/feedhenry-raincatcher/raincatcher-keycloak[github].
-. Run the {WFM-RC-KeycloakName} Docker image
+. Open a terminal and run the *{WFM-RC-KeycloakName}* Docker image
 
 [source,bash]
 ----
 docker run -p 8080:8080 feedhenry/raincatcher-keycloak
 ----
 
-For more information on this docker image see the docker image link:{WFM-RC-KeycloakDockerURL}{WFM-RC-Branch}/README.md[README.md].
+For more information about the *{WFM-RC-KeycloakName}* Docker Image, see the *{WFM-RC-KeycloakName}* link:{WFM-RC-KeycloakDockerURL}{WFM-RC-Branch}/README.md[README.md].
 
-[[enabling-the-keycloak-demo-server]]
-== Enabling {WFM-RC-KeycloakName} on the Demo Server
+[id=pro-adding-keycloak-configuration-{chapter}]
+[discrete]
+=== Adding {WFM-RC-KeycloakName} Configuration
 
-. Import the link:{WFM-RC-KeycloakDockerURL}{WFM-RC-Branch}/data_files/raincatcher-realm.json[Realm settings] json file.
+. Choose which _configuration file_ to edit:
++
+.*{WFM-RC-KeycloakName}* Configuration File
+|===
+|Area |File Name | File Location
 
-The following steps are for using the pre-configured docker image but will work for any instance of {WFM-RC-KeycloakName}
-provided you implement our Realm settings.
+|Development
+|link:{WFM-RC-CoreURL}{WFM-RC-Branch}/demo/server/config-dev.json[config-dev.json]
+|/demo/server/config-dev.json
 
-- Create a new field `"keycloakConfig":` with the data below
+|Production
+|link:{WFM-RC-CoreURL}{WFM-RC-Branch}/demo/server/config-prod.json[config-prod.json]
+|/demo/server/config-prod.json
 
-    "keycloakConfig":{
-                        "realm": "raincatcher",
-                        "bearer-only": true,
-                        "auth-server-url": "http://localhost:8080/auth",
-                        "ssl-required": "external",
-                        "resource": "raincatcher-cloud",
-                        "use-resource-role-mappings": true
-                      }
+|===
++
+. Open the _configuration file_, create a new field called `keycloakConfig` and add the following data to `keycloakConfig`:
++
+NOTE: The `keycloakConfig` field is partially implemented in link:{WFM-RC-CoreURL}{WFM-RC-Branch}/demo/server/config-prod.json[config-prod.json].
++
+[source,javascript]
+----
+"keycloakConfig":{
+                    "realm": "raincatcher",
+                    "bearer-only": true,
+                    "auth-server-url": "http://localhost:8080/auth",
+                    "ssl-required": "external",
+                    "resource": "raincatcher-cloud",
+                    "use-resource-role-mappings": true
+                  }
+----
 
-- Add this field to your production or development environment by editing the relevant file in the Demo Application
 
-link:{WFM-RC-CoreURL}{WFM-RC-Branch}/demo/server/config-dev.json[/demo/server/config-dev.json]
+[id=pro-enabling-keycloak-on-the-demo-server-{chapter}]
+[discrete]
+=== Enabling {WFM-RC-KeycloakName} on the Demo Server
 
-link:{WFM-RC-CoreURL}{WFM-RC-Branch}/demo/server/config-prod.json[/demo/server/config-prod.json]
-
-Note: There is partially implemented of the `keycloakConfig` object at `/demo/server/config-prod.json` as an example.
-
-- Some small changes to code the mobile and and portal applications are required to disable passportAuth and enable {WFM-RC-KeycloakName}
-
-Change the following file link:{WFM-RC-AngularJsURL}{WFM-RC-Branch}/demo/mobile/src/app/app.js[/demo/mobile/src/app/app.js]
+. Open the file link:{WFM-RC-AngularJsURL}{WFM-RC-Branch}/demo/mobile/src/app/app.js[app.js] in location _/demo/mobile/src/app/_ and change the contents to:
++
 [source,javascript]
 ----
     // Comment to disable passport auth
@@ -63,7 +80,9 @@ Change the following file link:{WFM-RC-AngularJsURL}{WFM-RC-Branch}/demo/mobile/
     // Uncomment to enable Keycloak
     // require('../keycloak');
 ----
-As above change the following file link:{WFM-RC-AngularJsURL}{WFM-RC-Branch}/demo/portal/src/app/main.js[/demo/portal/src/app/main.js]
++
+. Open the file link:{WFM-RC-AngularJsURL}{WFM-RC-Branch}/demo/portal/src/app/main.js[main.js] in location _/demo/portal/src/app/_ and change the contents to:
++
 [source,javascript]
 ----
     // Comment to disable passport auth
@@ -71,12 +90,13 @@ As above change the following file link:{WFM-RC-AngularJsURL}{WFM-RC-Branch}/dem
     // Uncomment to enable Keycloak
     // require('./keycloak');
 ----
++
+. At this point, the _Routes_ are protected by *{WFM-RC-KeycloakName}*.
 
-- Routes will now be protected with {WFM-RC-KeycloakName}
-
+<ENG: NOT SURE ABOUT THE NEXT TEXT APPEARING HERE>
 == Reference {WFM-RC-KeycloakName}
 
-To login into {WFM-RC-KeycloakName} Admin Console, navigate to http://localhost:8080/auth/ and login as the admin user using the following credentials:
+To login into *{WFM-RC-KeycloakName}* Admin Console, navigate to http://localhost:8080/auth/ and login as the admin user using the following credentials:
 
     Username: admin
     Password: admin
