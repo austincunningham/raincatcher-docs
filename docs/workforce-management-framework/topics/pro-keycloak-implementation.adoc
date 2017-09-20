@@ -32,7 +32,12 @@ Import the link:{WFM-RC-CoreURL}{WFM-RC-Branch}/cloud/auth/src/EndpointSecurity.
 [discrete]
 === Importing {WFM-RC-KeycloakName} _init_
 
-Import *{WFM-RC-KeycloakName}* _init_ <ENG: how?> from link:{WFM-RC-CoreURL}{WFM-RC-Branch}/demo/server/src/modules/keycloak/index.ts[Keycloak].
+Import *{WFM-RC-KeycloakName}* _init_ from link:{WFM-RC-CoreURL}{WFM-RC-Branch}/demo/server/src/modules/keycloak/index.ts[Keycloak]. For example:
+
+[source,typescript]
+----
+import { init as initKeycloak } from './keycloak';
+----
 
 [id='pro-applying-keycloak-init-{chapter}']
 [discrete]
