@@ -43,7 +43,7 @@ Import *{WFM-RC-KeycloakName}* _init_ <ENG: how?> from link:{WFM-RC-CoreURL}{WFM
 [discrete]
 === Applying {WFM-RC-KeycloakName} _init_
 
-Apply *{WFM-RC-KeycloakName}* _init_ to the security Middleware <ENG: what is 'security Middleware' and how?> to enable *{WFM-RC-KeycloakName}* for route protection.
+Apply *{WFM-RC-KeycloakName}* _init_ to the security Middleware to enable *{WFM-RC-KeycloakName}* for route protection.
 See the link:{WFM-RC-CoreURL}{WFM-RC-Branch}/demo/server/src/modules/index.ts[securitySetup] code for more information.
 
 [id='pro-enabling-keycloak-route-protection-{chapter}']
