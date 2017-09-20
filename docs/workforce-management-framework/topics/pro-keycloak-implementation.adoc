@@ -26,12 +26,7 @@ See the link:{WFM-RC-CoreURL}{WFM-RC-Branch}/demo/server/src/modules/keycloak/in
 [discrete]
 === Importing The EndpointSecurity Interface
 
-Import *{WFM-RC-KeycloakName}* _init_ from link:{WFM-RC-CoreURL}{WFM-RC-Branch}/demo/server/src/modules/keycloak/index.ts[Keycloak]. For example:
-
-[source,typescript]
-----
-import { init as initKeycloak } from './keycloak';
-----
+Import the link:{WFM-RC-CoreURL}{WFM-RC-Branch}/cloud/auth/src/EndpointSecurity.ts[EndpointSecurity Interface] and apply it to a variable <ENG: what variable and how?>.
 
 [id='pro-importing-keycloak-init-{chapter}']
 [discrete]
